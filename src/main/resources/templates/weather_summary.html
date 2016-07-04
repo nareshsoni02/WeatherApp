@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link href="css/style.css" rel="stylesheet" type="text/css">
+	<title>Weather Summary</title>
+</head>
+<body>
+	<h1>Weather Summary</h1>
+	<!-- weather  -->
+	<div class="weather-widget">
+		{{#weather_summary}}
+		<h2>{{city}}, {{countryCode}}</h2>
+
+
+		<h2>{{weatherMain}} <img src="http://openweathermap.org/img/w/{{icon}}.png"> {{temperatureC}} °C/{{temperatureF}} °F</h2>
+		<div>get at {{timestamp}}</div>
+
+		<br>
+		<table border="1" cellpadding="10" cellspacing="0" width="250px"  width="150px">
+			<tbody>
+			<tr><td>Cloudiness</td><td  align="middle">{{weatherDescription}}</td></tr>
+			<tr><td>Sunrise</td><td  align="middle">{{sunrise}}</td></tr>
+			<tr><td>Sunset</td><td  align="middle">{{sunset}}</td></tr>
+			</tbody>
+		</table>
+		{{/weather_summary}}
+	</div>
+	<br>
+	<!-- weather  -->
+	<button><a href="/weather_search.html">&nbsp;&nbsp;Back&nbsp;&nbsp;</a></button>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Weather Search</title>
+</head>
+<body>
+<form th:action="@{/}" th:object="${searchForm}" method="post">
+    <h1>Weather Search</h1>
+    <p></p>
+    Please enter city name to find weather details :
+    <p></p>
+    <table>
+        <tr>
+            <td>City:</td>
+            <td><input type="text" name="city" th:field="*{searchForm.city}" /></td>
+            <!--<td th:if="${#fields.hasErrors('city')}" th:errors="*{city}">City Error</td>-->
+        </tr>
+        <tr><td colspan="2"></tr>
+        <tr>
+            <td><button type="submit">Submit</button></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
