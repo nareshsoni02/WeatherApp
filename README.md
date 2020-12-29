@@ -113,6 +113,7 @@ The Camel application can be stopped pressing ctrl+c in the shell.
 
 # How to Use
 1] Client Functionality
+
  a. To pubish price : POST request http://localhost:8080/mizuho-price-service/prices/create with
  
  Input :
@@ -162,11 +163,11 @@ The Camel application can be stopped pressing ctrl+c in the shell.
  
 2] Vendor Functionality
 
- a. To send prices
+ a. To send prices, use queue jms:queue:input
  
 3] Dowstream Functionality 
 
-a. To receive price
+a. To receive price, subscribe to topic jms:topic:downstream
  
 4] Swagger API : GET request http://localhost:8080/mizuho-price-service/api-doc
 
