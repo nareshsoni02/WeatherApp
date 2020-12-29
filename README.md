@@ -97,15 +97,24 @@ When the Camel application runs, you should see the following messages being log
 
 ....
 2020-12-29 23:09:18.714  INFO 14561 --- [main] o.a.activemq.broker.TransportConnector   : Connector vm://embedded started
+
 2020-12-29 23:09:18.750  INFO 14561 --- [main] o.a.c.i.e.InternalRouteStartupManager    : Route: vendor-price started and consuming from: jms://queue:input
+
 2020-12-29 23:09:18.751  INFO 14561 --- [main] o.a.c.i.e.InternalRouteStartupManager    : Route: doc-api started and consuming from: servlet:/api-doc
 2020-12-29 23:09:18.751  INFO 14561 --- [main] o.a.c.i.e.InternalRouteStartupManager    : Route: prices-vendor-api started and consuming from: servlet:/prices/vendor/%7Bid%7D
+
 2020-12-29 23:09:18.752  INFO 14561 --- [main] o.a.c.i.e.InternalRouteStartupManager    : Route: prices-instrument-api started and consuming from: servlet:/prices/instrument/%7Bid%7D
+
 2020-12-29 23:09:18.752  INFO 14561 --- [main] o.a.c.i.e.InternalRouteStartupManager    : Route: prices-create-api started and consuming from: servlet:/prices/create
+
 2020-12-29 23:09:18.756  INFO 14561 --- [main] o.a.c.impl.engine.AbstractCamelContext   : Total 7 routes, of which 7 are started
+
 2020-12-29 23:09:18.756  INFO 14561 --- [main] o.a.c.impl.engine.AbstractCamelContext   : Apache Camel 3.8.0-SNAPSHOT (MizuhoPriceService) started in 437ms
+
 2020-12-29 23:09:18.758  INFO 14561 --- [main] o.a.c.component.quartz.QuartzComponent   : Starting scheduler.
+
 2020-12-29 23:09:18.758  INFO 14561 --- [main] org.quartz.core.QuartzScheduler          : Scheduler DefaultQuartzScheduler-MizuhoPriceService_$_NON_CLUSTERED started.
+
 2020-12-29 23:09:18.760  INFO 14561 --- [main] c.mizuho.price.PriceServiceApplication   : Started PriceServiceApplication in 5.207 seconds (JVM running for 5.667)
 ....
 
@@ -268,14 +277,25 @@ The Camel application can be stopped pressing ctrl+c in the shell.
 }
  ```  
 ### Technologies used
-- Spring Core
-- Spring MVC
-- RestTemplate
-- Spring Boot
+- Java 8
 - Maven
-- Html/thymeleaf
-- Mockito
-- Junit
+- Spring Boot
+- Apache Camel
+- Camel’s REST DSL 
+- JPA
+- Spring Data
+- lombok
+- jackson
+- Quartz
 - Embedded Tomcat Server
-- MockMvc
-- TDD etc...
+- Activemq
+- Mysql
+- Embedded Tomcat Server
+- Embedded broker
+- JMS
+- Hsqldb
+- junit5
+- CamelSpringBootTest
+- slf4j
+- TDD
+- StarUML
