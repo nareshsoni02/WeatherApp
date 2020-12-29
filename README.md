@@ -113,7 +113,8 @@ The Camel application can be stopped pressing ctrl+c in the shell.
 
 # How to Use
 1] Client Functionality
- a. To pubish price : POST request http://localhost:8080/mizuho-price-service/prices/create with 
+ a. To pubish price : POST request http://localhost:8080/mizuho-price-service/prices/create with
+ 
  Input :
  ```json
     {
@@ -129,6 +130,7 @@ The Camel application can be stopped pressing ctrl+c in the shell.
    { "message": "Successfully created price" }
  ```
  b. To get price by vendor : GET request http://localhost:8080/mizuho-price-service/prices/vendor/Bloomberg
+ 
  Output : 200 OK
  ```json
     [
@@ -143,6 +145,7 @@ The Camel application can be stopped pressing ctrl+c in the shell.
     ]
  ```    
  c. To get price by instrument : GET request http://localhost:8080/mizuho-price-service/prices/instrument/DE000JPM85H5/
+ 
  Output : 200 OK
  ```json
     [
@@ -156,11 +159,15 @@ The Camel application can be stopped pressing ctrl+c in the shell.
         }
     ]
  ```  
+ 
 2] Vendor Functionality
  a. To send prices
+ 
 3] Dowstream Functionality 
  a. To receive price
+ 
 4] Swagger API : GET request http://localhost:8080/mizuho-price-service/api-doc
+
  Output : 200 OK
  ```json
 {
@@ -260,16 +267,6 @@ The Camel application can be stopped pressing ctrl+c in the shell.
   }
 }
  ```  
-
-
-### Swagger API
-
-The example provides API documentation of the service using Swagger
-using the _context-path_ `+camel-rest-jpa/api-doc+`. You can access the
-API documentation from your Web browser at
-http://localhost:8080/camel-rest-jpa/api-doc.
-
-
 ### Technologies used
 - Spring Core
 - Spring MVC
