@@ -11,10 +11,10 @@ Pric processor is heart of this application. It processes price from vendor, sto
 
 Following validation are done on vendor input:-
 
-a. Price is null or empty.
-b. Price does not have vendor.
-c. Price does not have instrument.
-d. Price does not have created date.
+1. Price is null or empty.
+2. Price does not have vendor.
+3. Price does not have instrument.
+4. Price does not have created date.
 
 Following design patterns are used to implement price processor:-
 
@@ -49,13 +49,11 @@ Price Rest API allow clients to publish and retrieve data from the store. Camelâ
 
 Using create API, client can publish single price to DB. Before storing, it goes through transformation and validation. It peforms following validation on client input:-
 
-Price is null or empty.
+1. Price is null or empty.
+2. Price does not have vendor.
+3. Price does not have instrument.
+4. Price does not have created date.
 
-Price does not have vendor.
-
-Price does not have instrument.
-
-Price does not have created date.
 
 Using get API, client can get all prices from a particular vendor or prices for a single instrument from various vendors. Get API filter prices older than 30 days.
 
