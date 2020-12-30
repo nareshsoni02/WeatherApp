@@ -1,5 +1,5 @@
 # Introduction
-This application provides price infomration to client and downstream systems as 
+This application provides price infomration to client and downstream systems as
 submitted by different vendors for traded instruments.
 
 ## High level design and Context
@@ -7,11 +7,11 @@ This application has 3 main high level component.
 
 ### 1. Price Processor
 
-![](src/PriceProcessorEIP.png)
+![](docs/PriceProcessorEIP.png)
 
-Pric processor is heart of this application. It processes price from vendor, stores it in db and passes it to downstream systems. It goes through series of steps - transformation, validation, persistence and distribution. It peforms validation on vendor input and redirect failed messages to deadletters queue for further processing and analysis. Deadletters queue can be further extended to redeilver message couple of times before storing it in DB for manual analysis. 
+Pric processor is heart of this application. It processes price from vendor, stores it in db and passes it to downstream systems. It goes through series of steps - transformation, validation, persistence and distribution. It peforms validation on vendor input and redirect failed messages to deadletters queue for further processing and analysis. Deadletters queue can be further extended to redeilver message couple of times before storing it in DB for manual analysis.
 
-![](src/PriceProcessorSeq.png)
+![](docs/PriceProcessorSeq.png)
 
 Following validation are done on vendor input:-
 
@@ -29,26 +29,26 @@ Following design patterns are used to implement price processor:-
 5. Message - Message Exchange pattern inOnly is used to pass message one way.
 6. Pipes and Filters - Pipes and Filters are used to connect vairous component of processor.
 7. Message Translator -  Message Translator is used to convert json price message to POJO.
-8. Message Endpoints - Various message Endpoints are implemented using route URIs rather than directly using the Endpoint interface. 
+8. Message Endpoints - Various message Endpoints are implemented using route URIs rather than directly using the Endpoint interface.
 9. IOC - All depdencies are injected through interfaces.
 
 ### 2. Price Cleaner
 
-![](src/PriceCleanerEIP.png)
+![](docs/PriceCleanerEIP.png)
 
 Price cleaner removes old/stale price above configured threshold. Price threshold and uri of cleaner can be changed using configuration. Currently it is configured to use qurtz uri which runs cron job once in a day at mid night. It invokes PriceSeviceImpl to execute delete commands. Any exception during execution of job are logged as ERROR.
 
 Following design patterns are used to implement price Cleaner:-
 
 1. Event Message -  Oneway event message are triggered using Scheduler.
-2. Message Endpoints - log:dead message Endpoint is implemented using route URI. 
+2. Message Endpoints - log:dead message Endpoint is implemented using route URI.
 
 
-![](src/PriceCleanerSeq.png)
+![](docs/PriceCleanerSeq.png)
 
 ### 3. Price Rest API
 
-![](src/PriceRestAPIEIP.png)
+![](docs/PriceRestAPIEIP.png)
 
 Price Rest API allows client to publish and retrieve data from the store. Camel’s REST DSL are used to implement to RESTful API that performs required operations on a database.
 
@@ -59,21 +59,21 @@ Using create API, client can publish single price to DB. Before storing, it goes
 3. Price does not have instrument.
 4. Price does not have created date.
 
-![](src/CreateAPISeq.png)
+![](docs/CreateAPISeq.png)
 
 Using get API, client can get all prices from a particular vendor or prices for a single instrument from various vendors. Get API filter prices older than 30 days.
 
-![](src/PriceByVendorSeq.png)
+![](docs/PriceByVendorSeq.png)
 
-![](src/PriceByInstrumentSeq.png)
+![](docs/PriceByInstrumentSeq.png)
 
 ## ER Diagram
 
-![](src/PriceDataModel.png)
+![](docs/PriceDataModel.png)
 
 ## Class Diagram
 
-![](src/PriceServiceClassDiagram.png)
+![](docs/PriceServiceClassDiagram.png)
 
 ## Interfaces
 
@@ -92,11 +92,11 @@ The service exposes following rest api to allow clients to publish and retrieve 
     http://localhost:8080/mizuho-price-service/prices/create
 2. Get price by Vendor : To get all prices from a particular vendor.
     http://localhost:8080/mizuho-price-service/prices/vendor/:vendor
-3. Get price by Vendor : To get all prices for a single instrument from various vendors. 
+3. Get price by Vendor : To get all prices for a single instrument from various vendors.
     http://localhost:8080/mizuho-price-service/prices/instrument/:instrument
 
 ### 3. Swagger API
-The app provides API documentation of the services using Swagger using the _context-path_ `+mizuho-price-service/api-doc+`. 
+The app provides API documentation of the services using Swagger using the _context-path_ `+mizuho-price-service/api-doc+`.
 You can access the API documentation from your Web browser at
     http://localhost:8080/mizuho-price-service/api-doc
 
@@ -153,14 +153,14 @@ The Camel application can be stopped pressing ctrl+c in the shell.
 1] Client Functionality
 
  a. To pubish price : POST request http://localhost:8080/mizuho-price-service/prices/create with
- 
+
  Input :
  ```json
     {
 	"vendor" : "Bloomberg",
-	"instrument" : "DE000JPM85H5", 
-	"bid" :  80.63, 
-	"ask" : 66.27, 
+	"instrument" : "DE000JPM85H5",
+	"bid" :  80.63,
+	"ask" : 66.27,
 	"created" : "2020-12-29T12:11:22z"
     }
  ```
@@ -169,7 +169,7 @@ The Camel application can be stopped pressing ctrl+c in the shell.
    { "message": "Successfully created price" }
  ```
  b. To get price by vendor : GET request http://localhost:8080/mizuho-price-service/prices/vendor/Bloomberg
- 
+
  Output : 200 OK
  ```json
     [
@@ -182,9 +182,9 @@ The Camel application can be stopped pressing ctrl+c in the shell.
             "created": "2020-12-29T12:11:22Z"
         }
     ]
- ```    
+ ```
  c. To get price by instrument : GET request http://localhost:8080/mizuho-price-service/prices/instrument/DE000JPM85H5/
- 
+
  Output : 200 OK
  ```json
     [
@@ -197,16 +197,16 @@ The Camel application can be stopped pressing ctrl+c in the shell.
             "created": "2020-12-29T12:11:22Z"
         }
     ]
- ```  
- 
+ ```
+
 2] Vendor Functionality
 
  a. To send price, use queue jms:queue:input
- 
-3] Dowstream Functionality 
+
+3] Dowstream Functionality
 
 a. To receive price, subscribe to topic jms:topic:downstream
- 
+
 4] Swagger API : GET request http://localhost:8080/mizuho-price-service/api-doc
 
  Output : 200 OK
@@ -307,13 +307,13 @@ a. To receive price, subscribe to topic jms:topic:downstream
     }
   }
 }
- ```  
+ ```
 ### Technologies used
 - Java 8
 - Maven
 - Spring Boot
 - Apache Camel
-- Camel’s REST DSL 
+- Camel’s REST DSL
 - JPA
 - Spring Data
 - lombok
