@@ -68,17 +68,13 @@ Using get API, client can get all prices from a particular vendor or prices for 
 
 ![](src/PriceByInstrumentSeq.png)
 
-## ER model
+## ER Diagram
 
 ![](src/PriceDataModel.png)
 
 ## Class Diagram
 
 ![](src/PriceServiceClassDiagram.png)
-
-## Sequence Diagram
-
-![](src/PriceProcessor.png)
 
 ## Interfaces
 
@@ -139,17 +135,17 @@ Spring Boot profile in case you have a MySQL server available for you to test.
 When the Camel application runs, you should see the following messages being logged to the console, e.g.:
 
 ....
-2020-12-29 23:09:18.714  INFO 14561 --- [main] o.a.activemq.broker.TransportConnector:Connector vm://embedded started
-2020-12-29 23:09:18.750  INFO 14561 --- [main] o.a.c.i.e.InternalRouteStartupManager:Route: vendor-price started and consuming from: jms://queue:input
-2020-12-29 23:09:18.751  INFO 14561 --- [main] o.a.c.i.e.InternalRouteStartupManager:Route: doc-api started and consuming from: servlet:/api-doc
-2020-12-29 23:09:18.751  INFO 14561 --- [main] o.a.c.i.e.InternalRouteStartupManager:Route: prices-vendor-api started and consuming from: servlet:/prices/vendor/%7Bid%7D
-2020-12-29 23:09:18.752  INFO 14561 --- [main] o.a.c.i.e.InternalRouteStartupManager:Route: prices-instrument-api started and consuming from: servlet:/prices/instrument/%7Bid%7D
-2020-12-29 23:09:18.752  INFO 14561 --- [main] o.a.c.i.e.InternalRouteStartupManager:Route: prices-create-api started and consuming from: servlet:/prices/create
-2020-12-29 23:09:18.756  INFO 14561 --- [main] o.a.c.impl.engine.AbstractCamelContext:Total 7 routes, of which 7 are started
-2020-12-29 23:09:18.756  INFO 14561 --- [main] o.a.c.impl.engine.AbstractCamelContext:Apache Camel 3.8.0-SNAPSHOT (MizuhoPriceService) started in 437ms
-2020-12-29 23:09:18.758  INFO 14561 --- [main] o.a.c.component.quartz.QuartzComponent:Starting scheduler.
-2020-12-29 23:09:18.758  INFO 14561 --- [main] org.quartz.core.QuartzScheduler:Scheduler DefaultQuartzScheduler-MizuhoPriceService_$_NON_CLUSTERED started.
-2020-12-29 23:09:18.760  INFO 14561 --- [main] c.mizuho.price.PriceServiceApplication:Started PriceServiceApplication in 5.207 seconds (JVM running for 5.667)
+INFO 14561 --- [main] o.a.activemq.broker.TransportConnector:Connector vm://embedded started
+INFO 14561 --- [main] o.a.c.i.e.InternalRouteStartupManager:Route: vendor-price started and consuming from: jms://queue:input
+INFO 14561 --- [main] o.a.c.i.e.InternalRouteStartupManager:Route: doc-api started and consuming from: servlet:/api-doc
+INFO 14561 --- [main] o.a.c.i.e.InternalRouteStartupManager:Route: prices-vendor-api started and consuming from: servlet:/prices/vendor/%7Bid%7D
+INFO 14561 --- [main] o.a.c.i.e.InternalRouteStartupManager:Route: prices-instrument-api started and consuming from: servlet:/prices/instrument/%7Bid%7D
+INFO 14561 --- [main] o.a.c.i.e.InternalRouteStartupManager:Route: prices-create-api started and consuming from: servlet:/prices/create
+INFO 14561 --- [main] o.a.c.impl.engine.AbstractCamelContext:Total 7 routes, of which 7 are started
+INFO 14561 --- [main] o.a.c.impl.engine.AbstractCamelContext:Apache Camel 3.8.0-SNAPSHOT (MizuhoPriceService) started in 437ms
+INFO 14561 --- [main] o.a.c.component.quartz.QuartzComponent:Starting scheduler.
+INFO 14561 --- [main] org.quartz.core.QuartzScheduler:Scheduler DefaultQuartzScheduler-MizuhoPriceService_$_NON_CLUSTERED started.
+INFO 14561 --- [main] c.mizuho.price.PriceServiceApplication:Started PriceServiceApplication in 5.207 seconds (JVM running for 5.667)
 ....
 
 The Camel application can be stopped pressing ctrl+c in the shell.
