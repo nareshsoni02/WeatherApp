@@ -68,15 +68,13 @@ Using get API, client can get all prices from a particular vendor or prices for 
 
 ![](src/PriceByInstrumentSeq.png)
 
-## Challenges
-
 ## ER model
 
 ![](src/PriceDataModel.png)
 
 ## Class Diagram
 
-![](src/PriceServiceClassDiagram.PNG)
+![](src/PriceServiceClassDiagram.png)
 
 ## Sequence Diagram
 
