@@ -50,7 +50,7 @@ Following design patterns are used to implement price Cleaner:-
 
 ![](docs/PriceRestAPIEIP.png)
 
-Price Rest API allows clients to publish and retrieve data from the store. Camel’s REST DSL is used to implement to a RESTful API that performs required operations on a database.
+Price Rest API allows clients to publish and retrieve data from the store. Camel’s REST DSL is used to implement a RESTful API that performs required operations on a database.
 
 Using the created API, clients can publish single prices to DB. Before storing, it goes through transformation and validation. It performs following validation on client input:-
 
@@ -88,7 +88,7 @@ This app exposes following endpoints to interface it with external services.
 ### 2. Rest API
 The service exposes the following rest api to allow clients to publish and retrieve data from the store.
 
-1. Creat Price: To publish new price for specific vendor and instrument.
+1. Create Price: To publish new price for specific vendor and instrument.
     http://localhost:8080/mizuho-price-service/prices/create
 2. Get price by Vendor : To get all prices from a particular vendor.
     http://localhost:8080/mizuho-price-service/prices/vendor/:vendor
@@ -152,7 +152,7 @@ The Camel application can be stopped pressing ctrl+c in the shell.
 # How to Use
 1] Client Functionality
 
- a. To pubish price : POST request http://localhost:8080/mizuho-price-service/prices/create with
+ a. To publish price : POST request http://localhost:8080/mizuho-price-service/prices/create with
 
  Input :
  ```json
