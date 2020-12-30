@@ -1,46 +1,46 @@
 # Introduction
-This application provides price infomration to client and downstream systems as
+This application provides price information to client and downstream systems as
 submitted by different vendors for traded instruments.
 
 ## High level design and Context
-This application has 3 main high level component.
+This application has 3 main high level components.
 
 ### 1. Price Processor
 
 ![](docs/PriceProcessorEIP.png)
 
-Pric processor is heart of this application. It processes price from vendor, stores it in db and passes it to downstream systems. It goes through series of steps - transformation, validation, persistence and distribution. It peforms validation on vendor input and redirect failed messages to deadletters queue for further processing and analysis. Deadletters queue can be further extended to redeilver message couple of times before storing it in DB for manual analysis.
+Price processor is the heart of this application. It processes price from vendor, stores it in db and passes it to downstream systems. It goes through series of steps - transformation, validation, persistence and distribution. It performs validation on vendor input and redirects failed messages to dead letter queue for further processing and analysis. Dead Letter queue can be further extended to redeliver messages a couple of times before storing it in DB for manual analysis.
 
 ![](docs/PriceProcessorSeq.png)
 
 Following validation are done on vendor input:-
 
 1. Price is null or empty.
-2. Price does not have vendor.
-3. Price does not have instrument.
-4. Price does not have created date.
+2. Price does not have a vendor.
+3. Price does not have instruments.
+4. Price does not have a created date.
 
 Following design patterns are used to implement price processor:-
 
 1. Point to Point Channel - Queue is used to establish connection between price processor and various vendors.
-2. Publish Subscribe Channel - Topics are used to publish price to interested downstream system. New system can subscribe at anytime.
-3. Dead Letter Channel - The Dead Letter Channel is used to attempt redelivery, handle poison message and store it for future analysis.
+2. Publish Subscribe Channel - Topics are used to publish price to interested downstream systems. New systems can subscribe at any time.
+3. Dead Letter Channel - The Dead Letter Channel is used to attempt redelivery, handle poison messages and store it for future analysis.
 4. Message Channel - Queue, Topic, Dead Letter queues are used.
-5. Message - Message Exchange pattern inOnly is used to pass message one way.
-6. Pipes and Filters - Pipes and Filters are used to connect vairous component of processor.
-7. Message Translator -  Message Translator is used to convert json price message to POJO.
+5. Message - Message Exchange pattern inOnly is used to pass messages one way.
+6. Pipes and Filters - Pipes and Filters are used to connect various components of the processor.
+7. Message Translator -  Message Translator is used to convert json price messages to POJO.
 8. Message Endpoints - Various message Endpoints are implemented using route URIs rather than directly using the Endpoint interface.
-9. IOC - All depdencies are injected through interfaces.
+9. IOC - All dependencies are injected through interfaces.
 
 ### 2. Price Cleaner
 
 ![](docs/PriceCleanerEIP.png)
 
-Price cleaner removes old/stale price above configured threshold. Price threshold and uri of cleaner can be changed using configuration. Currently it is configured to use qurtz uri which runs cron job once in a day at mid night. It invokes PriceSeviceImpl to execute delete commands. Any exception during execution of job are logged as ERROR.
+Price cleaner removes old/stale price above configured threshold. Price threshold and uri of cleaner can be changed using configuration. Currently it is configured to use quartz uri which runs cron jobs once in a day at midnight. It invokes PriceSeviceImpl to execute delete commands. Any exceptions during execution of a job are logged as ERROR.
 
 Following design patterns are used to implement price Cleaner:-
 
-1. Event Message -  Oneway event message are triggered using Scheduler.
+1. Event Message -  Oneway event messages are triggered using Scheduler.
 2. Message Endpoints - log:dead message Endpoint is implemented using route URI.
 
 
@@ -50,18 +50,18 @@ Following design patterns are used to implement price Cleaner:-
 
 ![](docs/PriceRestAPIEIP.png)
 
-Price Rest API allows client to publish and retrieve data from the store. Camel’s REST DSL are used to implement to RESTful API that performs required operations on a database.
+Price Rest API allows clients to publish and retrieve data from the store. Camel’s REST DSL is used to implement to a RESTful API that performs required operations on a database.
 
-Using create API, client can publish single price to DB. Before storing, it goes through transformation and validation. It peforms following validation on client input:-
+Using the created API, clients can publish single prices to DB. Before storing, it goes through transformation and validation. It performs following validation on client input:-
 
 1. Price is null or empty.
-2. Price does not have vendor.
-3. Price does not have instrument.
-4. Price does not have created date.
+2. Price does not have a vendor.
+3. Price does not have instruments.
+4. Price does not have a created date.
 
 ![](docs/CreateAPISeq.png)
 
-Using get API, client can get all prices from a particular vendor or prices for a single instrument from various vendors. Get API filter prices older than 30 days.
+Using the get API, clients can get all prices from a particular vendor or prices for a single instrument from various vendors. Get API filter prices older than 30 days.
 
 ![](docs/PriceByVendorSeq.png)
 
@@ -82,11 +82,11 @@ This app exposes following endpoints to interface it with external services.
 
 1. Input Endpoint: It is used by different vendors to send price information. It can be configured through the `priceservice.queue.input.uri` property. E.g. jms:queue:input
 2. Dead Endpoint:  It is used to redirect all errors for further consideration and analysis. It can be configured through the `priceservice.queue.dead.uri` property. E.g. jms:queue:deadletters
-3. Recursive Endpoint: It is used to execute regular task. It can be configured through the `priceservice.quartz.delete.uri` property. E.g. quartz://priceServiceGroup/deleteInvalidPrice?cron=0+0+0+*+*+?
+3. Recursive Endpoint: It is used to execute regular tasks. It can be configured through the `priceservice.quartz.delete.uri` property. E.g. quartz://priceServiceGroup/deleteInvalidPrice?cron=0+0+0+*+*+?
 4. Output Endpoint: It is used to distribute prices to interested downstream systems. It can be configured through the `priceservice.topic.downstream.uri` property. E.g. jms:topic:downstream
 
 ### 2. Rest API
-The service exposes following rest api to allow clients to publish and retrieve data from the store.
+The service exposes the following rest api to allow clients to publish and retrieve data from the store.
 
 1. Creat Price: To publish new price for specific vendor and instrument.
     http://localhost:8080/mizuho-price-service/prices/create
@@ -102,7 +102,7 @@ You can access the API documentation from your Web browser at
 
 ## Running the Project / Demo
 
-### Pre-requisite
+### Prerequisite
 
 * maven 3.3.x
 * java 1.8+
@@ -203,7 +203,7 @@ The Camel application can be stopped pressing ctrl+c in the shell.
 
  a. To send price, use queue jms:queue:input
 
-3] Dowstream Functionality
+3] Downstream Functionality
 
 a. To receive price, subscribe to topic jms:topic:downstream
 
