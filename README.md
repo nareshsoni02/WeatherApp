@@ -9,7 +9,7 @@ This application has 3 main high level component.
 
 ![](src/PriceProcessorEIP.png)
 
-Pric processor is heart of this application. It processes price from vendor, stores it in db and passes it to downstream systems. It goes through series of steps - transformation, validation, persistence and distribution. It peforms validation on vendor input and redirect failed messages to deadletters queue for further processing and analysis. Deadletters queue can be further extended to redeilver meesage couple of times before storing it in DB for manual analysis. 
+Pric processor is heart of this application. It processes price from vendor, stores it in db and passes it to downstream systems. It goes through series of steps - transformation, validation, persistence and distribution. It peforms validation on vendor input and redirect failed messages to deadletters queue for further processing and analysis. Deadletters queue can be further extended to redeilver message couple of times before storing it in DB for manual analysis. 
 
 ![](src/PriceProcessorSeq.png)
 
@@ -23,10 +23,10 @@ Following validation are done on vendor input:-
 Following design patterns are used to implement price processor:-
 
 1. Point to Point Channel - Queue is used to establish connection between price processor and various vendors.
-2. Publish Subscribe Channel - Topics are used to publish price to interested downstream system. New system can subscribed at anytime.
-3. Dead Letter Channel - The Dead Letter Channel is used to attempt redelivery, handle poision message and store it for future analysis.
+2. Publish Subscribe Channel - Topics are used to publish price to interested downstream system. New system can subscribe at anytime.
+3. Dead Letter Channel - The Dead Letter Channel is used to attempt redelivery, handle poison message and store it for future analysis.
 4. Message Channel - Queue, Topic, Dead Letter queues are used.
-5. Message - Message Exchange pattern inOnly is to pass message one way.
+5. Message - Message Exchange pattern inOnly is used to pass message one way.
 6. Pipes and Filters - Pipes and Filters are used to connect vairous component of processor.
 7. Message Translator -  Message Translator is used to convert json price message to POJO.
 8. Message Endpoints - Various message Endpoints are implemented using route URIs rather than directly using the Endpoint interface. 
@@ -40,9 +40,8 @@ Price cleaner removes old/stale price above configured threshold. Price threshol
 
 Following design patterns are used to implement price Cleaner:-
 
-Event Message -  Oneway event message are triggered using Scheduler.
-
-Message Endpoints - log:dead message Endpoint is implemented using route URI. 
+1. Event Message -  Oneway event message are triggered using Scheduler.
+2. Message Endpoints - log:dead message Endpoint is implemented using route URI. 
 
 
 ![](src/PriceCleanerSeq.png)
@@ -51,7 +50,7 @@ Message Endpoints - log:dead message Endpoint is implemented using route URI.
 
 ![](src/PriceRestAPIEIP.png)
 
-Price Rest API allow clients to publish and retrieve data from the store. Camel’s REST DSL are used to implement to RESTful API that performs required operations on a database.
+Price Rest API allows client to publish and retrieve data from the store. Camel’s REST DSL are used to implement to RESTful API that performs required operations on a database.
 
 Using create API, client can publish single price to DB. Before storing, it goes through transformation and validation. It peforms following validation on client input:-
 
