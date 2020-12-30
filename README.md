@@ -80,11 +80,11 @@ Using get API, client can get all prices from a particular vendor or prices for 
 
 ## Class Diagram
 
-![](docs/PriceClassDiagram.png)
+![](src/PriceServiceClassDiagram.png)
 
 ## Sequence Diagram
 
-![](docs/PriceSequenceDiagram.png)
+![](src/PriceProcessor.png)
 
 ## Interfaces
 
