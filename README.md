@@ -128,7 +128,7 @@ Alternatively, you can also run this application using the executable JAR:
 ```bash
  java -jar -Dspring.profiles.active=dev target/price-service-0.0.1-SNAPSHOT.jar
 ```
-It will start the embedded tomcat server on default port 8080. This uses an embedded in-memory H2 database. You can use the default
+It will start the embedded tomcat server on default port 8080. It uses an embedded in-memory H2 database. You can use the default
 Spring Boot profile in case you have a MySQL server available for you to test.
 
 When the Camel application runs, you should see the following messages being logged to the console, e.g.:
