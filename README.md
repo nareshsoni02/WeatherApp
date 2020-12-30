@@ -12,31 +12,20 @@ Pric processor is heart of this application. It processes price from vendor, sto
 Following validation are done on vendor input:-
 
 Price is null or empty.
-
 Price does not have vendor.
-
 Price does not have instrument.
-
 Price does not have created date.
 
 Following design patterns are used to implement price processor:-
 
 Point to Point Channel - Queue is used to establish connection between price processor and various vendors.
-
 Publish Subscribe Channel - Topics are used to publish price to interested downstream system. New system can subscribed at anytime.
-
 Dead Letter Channel - The Dead Letter Channel is used to attempt redelivery, handle poision message and store it for future analysis.
-
 Message Channel - Queue, Topic, Dead Letter queues are used.
-
 Message - Message Exchange pattern inOnly is to pass message one way.
-
 Pipes and Filters - Pipes and Filters are used to connect vairous component of processor.
-
 Message Translator -  Message Translator is used to convert json price message to POJO.
-
 Message Endpoints - Various message Endpoints are implemented using route URIs rather than directly using the Endpoint interface. 
-
 IOC - All depdencies are injected through interfaces.
 
 ![](docs/PriceProcessor.png)
