@@ -133,7 +133,7 @@ Spring Boot profile in case you have a MySQL server available for you to test.
 
 When the Camel application runs, you should see the following messages being logged to the console, e.g.:
 
-....
+```bash
 INFO 14561 --- [main] o.a.activemq.broker.TransportConnector:Connector vm://embedded started
 INFO 14561 --- [main] o.a.c.i.e.InternalRouteStartupManager:Route: vendor-price started and consuming from: jms://queue:input
 INFO 14561 --- [main] o.a.c.i.e.InternalRouteStartupManager:Route: doc-api started and consuming from: servlet:/api-doc
@@ -145,7 +145,7 @@ INFO 14561 --- [main] o.a.c.impl.engine.AbstractCamelContext:Apache Camel 3.8.0-
 INFO 14561 --- [main] o.a.c.component.quartz.QuartzComponent:Starting scheduler.
 INFO 14561 --- [main] org.quartz.core.QuartzScheduler:Scheduler DefaultQuartzScheduler-MizuhoPriceService_$_NON_CLUSTERED started.
 INFO 14561 --- [main] c.mizuho.price.PriceServiceApplication:Started PriceServiceApplication in 5.207 seconds (JVM running for 5.667)
-....
+```
 
 The Camel application can be stopped pressing ctrl+c in the shell.
 
