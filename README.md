@@ -7,7 +7,11 @@ This application has 3 main high level component.
 
 ### 1. Price Processor
 
+![](src/PriceProcessorEIP.png)
+
 Pric processor is heart of this application. It processes price from vendor, stores it in db and passes it to downstream systems. It goes through series of steps - transformation, validation, persistence and distribution. It peforms validation on vendor input and redirect failed messages to deadletters queue for further processing and analysis. Deadletters queue can be further extended to redeilver meesage couple of times before storing it in DB for manual analysis. 
+
+![](src/PriceProcessorSeq.png)
 
 Following validation are done on vendor input:-
 
@@ -28,9 +32,9 @@ Following design patterns are used to implement price processor:-
 8. Message Endpoints - Various message Endpoints are implemented using route URIs rather than directly using the Endpoint interface. 
 9. IOC - All depdencies are injected through interfaces.
 
-![](docs/PriceProcessor.png)
-
 ### 2. Price Cleaner
+
+![](src/PriceCleanerEIP.png)
 
 Price cleaner removes old/stale price above configured threshold. Price threshold and uri of cleaner can be changed using configuration. Currently it is configured to use qurtz uri which runs cron job once in a day at mid night. It invokes PriceSeviceImpl to execute delete commands. Any exception during execution of job are logged as ERROR.
 
@@ -41,9 +45,11 @@ Event Message -  Oneway event message are triggered using Scheduler.
 Message Endpoints - log:dead message Endpoint is implemented using route URI. 
 
 
-![](docs/PriceCleaner.png)
+![](src/PriceCleanerSeq.png)
 
 ### 3. Price Rest API
+
+![](src/PriceRestAPIEIP.png)
 
 Price Rest API allow clients to publish and retrieve data from the store. Camel’s REST DSL are used to implement to RESTful API that performs required operations on a database.
 
@@ -54,16 +60,19 @@ Using create API, client can publish single price to DB. Before storing, it goes
 3. Price does not have instrument.
 4. Price does not have created date.
 
+![](src/CreateAPISeq.png)
 
 Using get API, client can get all prices from a particular vendor or prices for a single instrument from various vendors. Get API filter prices older than 30 days.
 
-![](docs/PriceRestAPI.png)
+![](src/PriceByVendorSeq.png)
+
+![](src/PriceByInstrumentSeq.png)
 
 ## Challenges
 
-## Domain model
+## ER model
 
-![](docs/PriceDataModel.png)
+![](src/PriceDataModel.png)
 
 ## Class Diagram
 
@@ -71,7 +80,7 @@ Using get API, client can get all prices from a particular vendor or prices for 
 
 ## Sequence Diagram
 
-![](src/PriceProcessor.PNG)
+![](src/PriceProcessor.png)
 
 ## Interfaces
 
