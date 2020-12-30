@@ -7,20 +7,50 @@ This application has 3 main high level component.
 
 ### 1. Price Processor
 
+Pric processor is heart of this application. It processes price from vendor, stores it in db and passes it to downstream systems. It goes through series of steps - transformation, validation, persistence and distribution. It peforms validation on vendor input and redirect failed messages to deadletters queue for further processing and analysis. Deadletters queue can be further extended to redeilver meesage couple of times before storing it in DB for manual analysis. 
+
+Following validation are done on vendor input:-
+Price is null or empty.
+Price does not have vendor.
+Price does not have instrument.
+Price does not have created date.
+
+Following design patterns are used to implement price processor:-
+Point to Point Channel - Queue is used to establish connection between price processor and various vendors.
+Publish Subscribe Channel - Topics are used to publish price to interested downstream system. New system can subscribed at anytime.
+Dead Letter Channel - The Dead Letter Channel is used to attempt redelivery, handle poision message and store it for future analysis.
+Message Channel - Queue, Topic, Dead Letter queues are used.
+Message - Message Exchange pattern inOnly is to pass message one way.
+Pipes and Filters - Pipes and Filters are used to connect vairous component of processor.
+Message Translator -  Message Translator is used to convert json price message to POJO.
+Message Endpoints - Various message Endpoints are implemented using route URIs rather than directly using the Endpoint interface. 
+IOC - All depdencies are injected through interfaces.
+
 ![](docs/PriceProcessor.png)
 
 ### 2. Price Cleaner
 
+Price cleaner removes old/stale price above configured threshold. Price threshold and uri of cleaner can be changed using configuration. Currently it is configured to use qurtz uri which runs cron job once in a day at mid night. It invokes PriceSeviceImpl to execute delete commands. Any exception during execution of job are logged as ERROR.
+
+Following design patterns are used to implement price Cleaner:-
+Event Message -  Oneway event message are triggered using Scheduler.
+Message Endpoints - log:dead message Endpoint is implemented using route URI. 
+
+
 ![](docs/PriceCleaner.png)
 
 ### 3. Price Rest API
-Camel’s REST DSL to expose a RESTful API that performs CRUD operations
-on a database.
 
-It generates orders for books referenced in database at a regular pace.
-Orders are processed asynchronously by another Camel route. Books
-available in database as well as the status of the generated orders can
-be retrieved via the REST API.
+Price Rest API allow clients to publish and retrieve data from the store. Camel’s REST DSL are used to implement to RESTful API that performs required operations on a database.
+
+Using create API, client can publish single price to DB. Before storing, it goes through transformation and validation. It peforms following validation on client input:-
+Price is null or empty.
+Price does not have vendor.
+Price does not have instrument.
+Price does not have created date.
+
+Using get API, client can get all prices from a particular vendor or prices for a single instrument from various vendors. Get API filter prices older than 30 days.
+
 ![](docs/PriceRestAPI.png)
 
 ## Challenges
