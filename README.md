@@ -201,7 +201,7 @@ The Camel application can be stopped pressing ctrl+c in the shell.
  
 2] Vendor Functionality
 
- a. To send prices, use queue jms:queue:input
+ a. To send price, use queue jms:queue:input
  
 3] Dowstream Functionality 
 
