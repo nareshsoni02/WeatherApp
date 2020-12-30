@@ -81,9 +81,9 @@ Using get API, client can get all prices from a particular vendor or prices for 
 This app exposes following endpoints to interface it with external services.
 
 1. Input Endpoint: It is used by different vendors to send price information. It can be configured through the `priceservice.queue.input.uri` property. E.g. jms:queue:input
-2. Dead Endpoint:  It is used to redirect all errors for further consideration and analysis. It can be configured through the `priceservice.queue.dead.uripriceservice.topic.downstream.uri` property. E.g. jms:queue:deadletters
+2. Dead Endpoint:  It is used to redirect all errors for further consideration and analysis. It can be configured through the `priceservice.queue.dead.uri` property. E.g. jms:queue:deadletters
 3. Recursive Endpoint: It is used to execute regular task. It can be configured through the `priceservice.quartz.delete.uri` property. E.g. quartz://priceServiceGroup/deleteInvalidPrice?cron=0+0+0+*+*+?
-4. Output Endpoint: It is used to distribute prices to interested downstream systems. It can be configured through the `priceservice.queue.dead.uri` property. E.g. jms:topic:downstream
+4. Output Endpoint: It is used to distribute prices to interested downstream systems. It can be configured through the `priceservice.topic.downstream.uri` property. E.g. jms:topic:downstream
 
 ### 2. Rest API
 The service exposes following rest api to allow clients to publish and retrieve data from the store.
