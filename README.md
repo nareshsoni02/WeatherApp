@@ -96,7 +96,7 @@ The service exposes following rest api to allow clients to publish and retrieve 
     http://localhost:8080/mizuho-price-service/prices/instrument/:instrument
 
 ### 3. Swagger API
-The app provides API documentation of the service using Swagger using the _context-path_ `+mizuho-price-service/api-doc+`. 
+The app provides API documentation of the services using Swagger using the _context-path_ `+mizuho-price-service/api-doc+`. 
 You can access the API documentation from your Web browser at
     http://localhost:8080/mizuho-price-service/api-doc
 
