@@ -17,7 +17,7 @@ This application has 3 main high level components.
 
 ![](docs/PriceProcessorEIP.png)
 
-Price processor is the heart of this application. It processes price from vendor, stores it in db and passes it to downstream systems. It goes through series of steps - transformation, validation, persistence and distribution. It performs validation on vendor input and redirects failed messages to dead letter queue for further processing and analysis. Dead Letter queue can be further extended to redeliver messages a couple of times before storing it in DB for manual analysis.
+Price processor is the heart of this application. It processes the price from the vendor, stores it in db and passes it to downstream systems. It goes through a series of steps - transformation, validation, persistence and distribution. It performs validation on vendor input and redirects failed messages to dead letter queue for further processing and analysis. Dead Letter queue can be further extended to redeliver messages a couple of times before storing it in DB for manual analysis.
 
 ![](docs/PriceProcessorSeq.png)
 
@@ -25,7 +25,7 @@ Following validation are done on vendor input:-
 
 1. Price is null or empty.
 2. Price does not have a vendor.
-3. Price does not have instruments.
+3. Price does not have instrument.
 4. Price does not have a created date.
 
 Following design patterns are used to implement price processor:-
@@ -60,11 +60,11 @@ Following design patterns are used to implement price Cleaner:-
 
 Price Rest API allows clients to publish and retrieve data from the store. Camel’s REST DSL is used to implement a RESTful API that performs required operations on a database.
 
-Using the created API, clients can publish single prices to DB. Before storing, it goes through transformation and validation. It performs following validation on client input:-
+Using the create API, clients can publish single price to DB. Before storing, it goes through transformation and validation. It performs following validations on client input:-
 
 1. Price is null or empty.
 2. Price does not have a vendor.
-3. Price does not have instruments.
+3. Price does not have instrument.
 4. Price does not have a created date.
 
 ![](docs/CreateAPISeq.png)
