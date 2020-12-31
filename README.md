@@ -8,8 +8,6 @@ submitted by different vendors for traded instruments.
 3. Instrument Type: I have assumed all instrument types come in the same format and structure. A new filter/router component can be added to differentiate specific types.
 4. Downstream System: For the purposes of simplicity, I am passing serialized price objects to downstream. It can be marshal to required downstream format using .marshal().json()
 
-
-
 ## High level design and Context
 This application has 3 main high level components.
 
@@ -76,6 +74,8 @@ Using the get API, clients can get all prices from a particular vendor or prices
 ![](docs/PriceByInstrumentSeq.png)
 
 ## ER Diagram
+
+For the purposes of simplicity, I have used flat price structrue but based on requirement it can be enhanced to complex structure using joins to vendor/instrument table.
 
 ![](docs/PriceDataModel.png)
 
