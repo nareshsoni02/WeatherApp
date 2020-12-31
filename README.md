@@ -22,9 +22,9 @@ Price processor is the heart of this application. It processes the price from th
 Following validation are done on vendor input:-
 
 1. Price is null or empty.
-2. Price does not have a vendor.
+2. Price does not have vendor.
 3. Price does not have instrument.
-4. Price does not have a created date.
+4. Price does not have created date.
 
 Following design patterns are used to implement price processor:-
 
@@ -61,9 +61,9 @@ Price Rest API allows clients to publish and retrieve data from the store. Camel
 Using the create API, clients can publish single price to DB. Before storing, it goes through transformation and validation. It performs following validations on client input:-
 
 1. Price is null or empty.
-2. Price does not have a vendor.
+2. Price does not have vendor.
 3. Price does not have instrument.
-4. Price does not have a created date.
+4. Price does not have created date.
 
 ![](docs/CreateAPISeq.png)
 
