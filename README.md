@@ -75,7 +75,7 @@ Using the get API, clients can get all prices from a particular vendor or prices
 
 ## ER Diagram
 
-For the purposes of simplicity, I have used flat price structrue but based on requirement it can be enhanced to complex structure using joins to vendor/instrument table.
+For the purposes of simplicity, I have used flat price structure but based on requirement it can be enhanced to complex structure using joins to vendor/instrument tables.
 
 ![](docs/PriceDataModel.png)
 
