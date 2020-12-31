@@ -3,10 +3,11 @@ This application provides price information to client and downstream systems as
 submitted by different vendors for traded instruments.
 
 ## Assumptions
-1. Input Format : For the purposes of simplicity, i have assumed that format received from different vendors for different instrument is homogenous.
-2. Validation: I have added check for mandatory fields. PriceValidator can be further enhanced to incorporate business need.
-3. Instrument Type: I have assumed all instrument type comes in same format and structure. A new filter/router component can be added to differentiate specific type.
-4. Downstream System:  For the purposes of simplicity, i am passing serialized price object to downstream. It can be marshal to required downstream format using .marshal().json()
+1. Input Format : For the purposes of simplicity, i have assumed that the format received from different vendors for different instruments is homogenous.
+2. Validation: I have added checks for mandatory fields. PriceValidator can be further enhanced to incorporate business needs.
+3. Instrument Type: I have assumed all instrument types come in the same format and structure. A new filter/router component can be added to differentiate specific types.
+4. Downstream System: For the purposes of simplicity, I am passing serialized price objects to downstream. It can be marshal to required downstream format using .marshal().json()
+
 
 
 ## High level design and Context
